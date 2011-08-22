@@ -35,8 +35,7 @@ module Acl9
       def acts_as_authorization_subject(options = {})
       	assoc = options[:association_name] || Acl9::config[:default_association_name]
         role = options[:role_class_name] || Acl9::config[:default_role_class_name]
-        join_table = options[:join_table_name] || Acl9::config[:default_join_table_name] ||
-                    join_table_name(undecorated_table_name(self.to_s), undecorated_table_name(role))
+        join_table = options[:join_table_name] || Acl9::config[:default_join_table_name] # || join_table_name(undecorated_table_name(self.to_s), undecorated_table_name(role))
         join_table_class_name = options[:association_class_name] || Acl9::config[:default_association_class_name]
         #has_and_belongs_to_many assoc, :class_name => role#, :join_table => join_table
         #has_many join_table, :class_name => join_table.split('_').map{|w| w.capitalize}.join
@@ -131,8 +130,7 @@ module Acl9
       # @see Acl9::ModelExtensions::Object#accepts_no_role!
       def acts_as_authorization_role(options = {})
         subject = options[:subject_class_name] || Acl9::config[:default_subject_class_name]
-        join_table = options[:join_table_name] || Acl9::config[:default_join_table_name] ||
-                     join_table_name(undecorated_table_name(self.to_s), undecorated_table_name(subject))
+        join_table = options[:join_table_name] || Acl9::config[:default_join_table_name] #|| join_table_name(undecorated_table_name(self.to_s), undecorated_table_name(subject))
 
         #has_and_belongs_to_many subject.demodulize.tableize.to_sym,
         #  :class_name => subject#,
